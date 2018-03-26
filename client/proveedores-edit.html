@@ -6,14 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Proveedores - Almacén Yuyitos</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="../client/assets/css/style.css">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="index.html">Almacén Yuyitos</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+            aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -32,7 +34,8 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuClientes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuClientes" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
                         Clientes
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuClientes">
@@ -62,7 +65,8 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuRecepcion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuRecepcion" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
                         Recepción de productos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuRecepcion">
@@ -72,7 +76,8 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuinformes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuinformes" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
                         Informes
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuInformes">
@@ -93,6 +98,31 @@
         </div>
     </header>
     <main class="container">
+        <div class="row bg-light py-4 mb-5">
+            <div class="form-group col-md-3">
+                <label class="w-100">Nombre Contacto:
+                    <input type="text" class="form-control" placeholder="Nombre contacto">
+                </label>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="w-100">Número Contacto:
+                    <input type="number" class="form-control" placeholder="Número contacto">
+                </label>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="w-100">Email Contacto:
+                    <input type="email" class="form-control" placeholder="Email contacto">
+                </label>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="w-100">Rubro Contacto:
+                    <input type="text" class="form-control" placeholder="Rubro contacto">
+                </label>
+            </div>
+            <div class="col-md-12 text-right">
+                <button class="btn btn-secondary">Agregar</button>
+            </div>
+        </div>
         <div class="row">
 
             <table class="table">
@@ -114,8 +144,8 @@
                         <td>lorem@ipsum.cl</td>
                         <td>Lorem</td>
                         <td>
-                            <a href="#" class="btn btn-danger">Eliminar</a>
-                            <a href="#" class="btn btn-secondary">Editar</a>
+                            <a href="#" class="btn btn-danger disabled">Eliminar</a>
+                            <a href="#" class="btn btn-secondary disabled">Editar</a>
                         </td>
                     </tr>
                     <tr>
@@ -125,8 +155,8 @@
                         <td>lorem@ipsum.cl</td>
                         <td>Lorem</td>
                         <td>
-                            <a href="#" class="btn btn-danger">Eliminar</a>
-                            <a href="#" class="btn btn-secondary">Editar</a>
+                            <a href="#" class="btn btn-danger disabled">Eliminar</a>
+                            <a href="#" class="btn btn-secondary disabled">Editar</a>
                         </td>
                     </tr>
                     <!-- <tr>
@@ -167,8 +197,8 @@
                         <td>lorem@ipsum.cl</td>
                         <td>Lorem</td>
                         <td>
-                            <a href="#" class="btn btn-danger">Eliminar</a>
-                            <a href="#" class="btn btn-secondary">Editar</a>
+                            <a href="#" class="btn btn-danger disabled">Eliminar</a>
+                            <a href="#" class="btn btn-secondary disabled">Editar</a>
                         </td>
                     </tr>
                 </tbody>
@@ -176,9 +206,12 @@
         </div>
     </main>
     <footer></footer>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
