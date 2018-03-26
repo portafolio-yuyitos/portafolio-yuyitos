@@ -1,0 +1,16 @@
+body {
+    background-color: #ececec;
+}
+
+.w-20 {
+    width: 20%;
+}
+
+.h-100vh {
+    height: 100vh;
+}
+
+main {
+    /* position: relative;
+    top: -3em; */
+}
