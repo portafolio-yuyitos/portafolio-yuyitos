@@ -2,6 +2,8 @@ function eliminarCliente(e) {
   $(e).closest('tr').remove();
 }
 
+// Recorre todos los input con clase editar y los muestra
+// Al mismo tiempo que esconde 
 function editarCliente(e) {
   var editores = $(e).closest('tr').find('.editar');
   $.each(editores, function (i, editor) {
@@ -18,12 +20,14 @@ function editarCliente(e) {
 }
 
 function guardarCliente(e) {
-  var editores = $(e).closest('tr').find('.editar');
+  var editores = $(e).closest('tr').find('.editar');//Todos los input con clase editar
   var valido = true;
 
-  $.each(editores, function (i, editor) {
+  $.each(editores, function (i, editor) {//recorrer todos los input
     //Si es la ultima columna
     if (editores.length - 1 !== i) {
+      //Si el error no tiene la clase d-none
+      //Se saldra de inmediato, ya ha validado los demás al modificarlos
       if (!$(editor).siblings('.error').hasClass('d-none')) {
         valido = false;
         alert('Debe ingresar todos los campos válidos');
@@ -32,7 +36,8 @@ function guardarCliente(e) {
     }
   })
 
-  if(valido){
+  //Recorre de nuevo para sacar esconder los input y mostrar lo nuevo
+  if(valido){//Si no hay errores
     $.each(editores, function (i, editor) {
       //Si es la ultima columna
       if (editores.length - 1 === i) {
@@ -50,7 +55,6 @@ function guardarCliente(e) {
 }
 
 function validarTodo(){
-
   var rut = $('#rut');
   var nombres = $('#nombres');
   var apellidos = $('#apellidos');
@@ -59,19 +63,19 @@ function validarTodo(){
 
   var valido = true;
 
-  if(!valTexto(rut, 10, 10)){
+  if(!checkRut(rut)){
     valido = false;  
   }
-  if(!valTexto(nombres, 10, 10)){
+  if(!valTexto(nombres, 4, 50)){
     valido = false;  
   }
-  if(!valTexto(apellidos, 10, 10)){
+  if(!valTexto(apellidos, 4, 50)){
     valido = false;  
   }
-  if(!valTexto(email, 10, 20)){
+  if(!valEmail(email)){
     valido = false;  
   }
-  if(!valTexto(numero, 10, 10)){
+  if(!valTexto(numero, 5, 10)){
     valido = false;  
   }
 
