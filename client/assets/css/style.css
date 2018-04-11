@@ -18,3 +18,7 @@ main {
 .error {
     font-size: 14px;
 }
+
+.cursor-pointer{
+	cursor: pointer;
+}
