@@ -93,6 +93,7 @@ function generarOP() {
   debugger
   var total = $('#total strong');//Total
   if (total.text() === "0") {//Si es 0
+    alert('Debes agregar al menos un producto');
     return false;
   } else {//Si es mas de cero
     var OP = {
