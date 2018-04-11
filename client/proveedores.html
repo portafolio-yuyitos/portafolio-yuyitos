@@ -6,16 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Proveedores - Almacén Yuyitos</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="../client/assets/css/style.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="index.html">Almacén Yuyitos</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-            aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -40,8 +39,7 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuRecepcion" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuRecepcion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Recepción de productos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuRecepcion">
@@ -51,8 +49,7 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuinformes" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuinformes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Informes
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuInformes">
@@ -76,31 +73,35 @@
         <div class="row bg-light py-4 mb-5">
             <div class="form-group col-md-3">
                 <label class="w-100">Nombre Contacto:
-                    <input type="text" class="form-control" placeholder="Nombre contacto">
+                    <input id="nombre" type="text" class="form-control" placeholder="Nombre" onkeyup="valTexto(this,4,50)">
+                    <label class="error text-danger d-none position-absolute"></label>
                 </label>
             </div>
             <div class="form-group col-md-3">
                 <label class="w-100">Número Contacto:
-                    <input type="number" class="form-control" placeholder="Número contacto">
+                        <input id="numero" type="text" class="form-control" placeholder="Número" onkeyup="valNumber(this,9,12)">
+                        <label class="error text-danger d-none position-absolute"></label>
                 </label>
             </div>
             <div class="form-group col-md-3">
                 <label class="w-100">Email Contacto:
-                    <input type="email" class="form-control" placeholder="Email contacto">
+                        <input id="email" type="email" class="form-control" placeholder="Email" onkeyup="valEmail(this)">
+                        <label class="error text-danger d-none position-absolute"></label>
                 </label>
             </div>
             <div class="form-group col-md-3">
                 <label class="w-100">Rubro Contacto:
-                    <input type="text" class="form-control" placeholder="Rubro contacto">
+                        <input id="rubro" type="text" class="form-control" placeholder="Rubro" onkeyup="valTexto(this,4,50)">
+                        <label class="error text-danger d-none position-absolute"></label>
                 </label>
             </div>
             <div class="col-md-12 text-right">
-                <button class="btn btn-secondary">Agregar</button>
+                <button class="btn btn-secondary" onclick="agregar()">Agregar</button>
             </div>
         </div>
         <div class="row">
 
-            <table class="table">
+            <table class="table" id="tabla">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
@@ -114,46 +115,30 @@
                 <tbody>
                     <tr>
                         <th scope="row">1</th>
-                        <td>Lorem Ipsum</td>
-                        <td>+569 5456 5455</td>
-                        <td>lorem@ipsum.cl</td>
-                        <td>Lorem</td>
                         <td>
-                            <a href="#" class="btn btn-danger">Eliminar</a>
-                            <a href="proveedores-edit.html" class="btn btn-secondary">Editar</a>
+                            <p>Lorem Ipsum</p>
+                            <input type="text" value="55555555-5" class="form-control editar d-none" onkeyup="valTexto(this,4,50)">
+                            <label class="error text-danger d-none "></label>
                         </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Lorem Ipsum</td>
-                        <td>+569 5456 5455</td>
-                        <td>lorem@ipsum.cl</td>
-                        <td>Lorem</td>
                         <td>
-                            <a href="#" class="btn btn-danger">Eliminar</a>
-                            <a href="proveedores-edit.html" class="btn btn-secondary">Editar</a>
+                            <p>+569 5456 5455</p>
+                            <input type="text" value="55555555-5" class="form-control editar d-none" onkeyup="valNumber(this,9,12)">
+                            <label class="error text-danger d-none "></label>
                         </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Lorem Ipsum</td>
-                        <td>+569 5456 5455</td>
-                        <td>lorem@ipsum.cl</td>
-                        <td>Lorem</td>
                         <td>
-                            <a href="#" class="btn btn-danger">Eliminar</a>
-                            <a href="proveedores-edit.html" class="btn btn-secondary">Editar</a>
+                            <p>lorem@ipsum.cl</p>
+                            <input type="text" value="55555555-5" class="form-control editar d-none" onkeyup="valEmail(this)">
+                            <label class="error text-danger d-none "></label>
                         </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td>Lorem Ipsum</td>
-                        <td>+569 5456 5455</td>
-                        <td>lorem@ipsum.cl</td>
-                        <td>Lorem</td>
                         <td>
-                            <a href="#" class="btn btn-danger">Eliminar</a>
-                            <a href="proveedores-edit.html" class="btn btn-secondary">Editar</a>
+                            <p>Lorem</p>
+                            <input type="text" value="55555555-5" class="form-control editar d-none" onkeyup="valTexto(this,4,50)">
+                            <label class="error text-danger d-none "></label>
+                        </td>
+                        <td>
+                            <a class="btn btn-primary editar d-none cursor-pointer" onclick="guardar(this)" data-toggle="tooltip" data-placement="top" title="Guardar contacto"><i class="fas fa-check-circle"></i></a>
+                            <a class="btn btn-danger btnEliminar mr-2 cursor-pointer" onclick="eliminar(this)" data-toggle="tooltip" data-placement="top" title="Eliminar contacto"><i class="fas fa-trash-alt"></i></a>
+                            <a class="btn btn-secondary btnEditar cursor-pointer" onclick="editar(this)" data-toggle="tooltip" data-placement="top" title="Editar contacto"><i class="fas fa-edit"></i></a>
                         </td>
                     </tr>
                 </tbody>
@@ -161,12 +146,11 @@
         </div>
     </main>
     <footer></footer>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="./assets/js/general.js"></script>
+    <script src="./assets/js/proveedores.js"></script>
 </body>
 
 </html>

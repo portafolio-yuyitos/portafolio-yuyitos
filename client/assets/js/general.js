@@ -6,8 +6,8 @@ $(document).ready(function () {
 
 // ********** VALIDACIONES ************
 
-/// e = elemento, 
-/// min = minima cantidad de texto, 
+/// e = elemento,
+/// min = minima cantidad de texto,
 /// max = maxima cantidad de texto
 function valTexto(e, min, max) {
   let valor = $(e).val();
@@ -78,13 +78,16 @@ function valEmail(e) {
     error.text('No debe estar vacío');
     error.removeClass('d-none');
     $(e).addClass('is-invalid');
+    return false;
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(valor)) {
     error.text('Debe ingresar email válido');
     error.removeClass('d-none');
     $(e).addClass('is-invalid');
+    return false;
   } else {
     error.addClass('d-none');
     $(e).removeClass('is-invalid');
+    return true;
   }
 }
 
@@ -152,3 +155,71 @@ function checkRut(rut) {
   $(rut).removeClass('is-invalid');
   return true;
 }
+
+function eliminar(e) {
+  $(e).closest('tr').remove();
+}
+
+// Recorre todos los input con clase editar y los muestra
+// Al mismo tiempo que esconde 
+function editar(e) {
+  var editores = $(e).closest('tr').find('.editar');
+  $.each(editores, function (i, editor) {
+    //Si es la ultima columna
+    if (editores.length - 1 === i) {
+      $(editor).removeClass('d-none');
+      $(editor).siblings('.btnEliminar').addClass('d-none');
+      $(editor).siblings('.btnEditar').addClass('d-none');
+    } else {
+      $(editor).removeClass('d-none');
+      $(editor).siblings('p').addClass('d-none');
+    }
+  })
+}
+
+function guardar(e) {
+  var editores = $(e).closest('tr').find('.editar');//Todos los input con clase editar
+  var valido = true;
+
+  $.each(editores, function (i, editor) {//recorrer todos los input
+    //Si es la ultima columna
+    if (editores.length - 1 !== i) {
+      //Si el error no tiene la clase d-none
+      //Se saldra de inmediato, ya ha validado los demás al modificarlos
+      if (!$(editor).siblings('.error').hasClass('d-none')) {
+        valido = false;
+        alert('Debe ingresar todos los campos válidos');
+        return false;
+      }
+    }
+  })
+    //Recorre de nuevo para sacar esconder los input y mostrar lo nuevo
+    if(valido){//Si no hay errores
+      $.each(editores, function (i, editor) {
+        //Si es la ultima columna
+        if (editores.length - 1 === i) {
+          $(editor).addClass('d-none');
+          $(editor).siblings('.btnEliminar').removeClass('d-none');
+          $(editor).siblings('.btnEditar').removeClass('d-none');
+        } else {
+          $(editor).addClass('d-none');
+          var texto = $(editor).val();
+          $(editor).siblings('p').text(texto);
+          $(editor).siblings('p').removeClass('d-none');
+        }
+      })
+    }
+  }
+  
+  function agregar(){
+
+    var valido = validarTodo();
+  
+    if(!valido){
+      alert('Hay campos no válidos')
+      return false;
+    }else{
+      llenarTabla(valido);
+      return true;
+    }
+  }
