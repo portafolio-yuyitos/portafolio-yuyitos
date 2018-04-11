@@ -5,17 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Proveedores - Almacén Yuyitos</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
+    <title>Orden de pedido - Almacén Yuyitos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="../client/assets/css/style.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="index.html">Almacén Yuyitos</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-            aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -29,19 +28,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="fiados.html">Fiados</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuOP" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Orden de pedido
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuOP">
-                        <a class="dropdown-item" href="orden-pedido.html">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="orden-pedido.html">Orden de pedido</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuRecepcion" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuRecepcion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Recepción de productos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuRecepcion">
@@ -51,8 +42,7 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuinformes" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuinformes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Informes
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuInformes">
@@ -77,29 +67,33 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="w-100">Proveedor
-                        <select class="form-control">
+                        <select class="form-control" id='proveedor' onchange="valSelect(this)">
                             <option>Seleccione</option>
+                            <option>dddd</option>
                         </select>
+                        <label class="error text-danger d-none position-absolute"></label>
                     </label>
                 </div>
                 <div class="form-group">
                     <label class="w-100">Producto
-                        <select class="form-control">
+                        <select class="form-control" id='producto'  onchange="valSelect(this)">
                             <option>Seleccione</option>
                         </select>
+                        <label class="error text-danger d-none position-absolute"></label>
                     </label>
                 </div>
-                <div class="form-group d-flex">
+                <div class="form-group d-flex flex-column align-items-end">
                     <label class="w-100">
                         Cantidad:
-                        <input type="number" value="0">
+                        <input class="form-control" type="number" value="0" id='cantidad' onkeyup="valNumber(this,1,6)">
+                        <label class="error text-danger d-none position-absolute"></label>
                     </label>
-                    <button class="btn btn-secondary">Agregar</button>
+                    <button class="btn btn-secondary d-block mt-4">Agregar</button>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="w-100">Productos
+                    <label class="w-100" id='productosContainer'>Productos
                         <ul>
                             <li>Producto 1</li>
                             <li>Producto 2</li>
@@ -125,7 +119,11 @@
                 <tbody>
                     <tr>
                         <th scope="row">1</th>
-                        <td>55555555-5</td>
+                        <td>
+                            <p>55555555-5</p>
+                            <input type="text" value="55555555-5" class="form-control editar d-none" onkeyup="checkRut(this)">
+                            <label class="error text-danger d-none "></label>
+                        </td>
                         <td>Lorem Ipsum</td>
                         <td>lorem@ipsum.cl</td>
                         <td>+569 5456 5455</td>
@@ -134,28 +132,6 @@
                             <a href="#" class="btn btn-secondary">Editar</a>
                         </td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>55555555-5</td>
-                        <td>Lorem Ipsum</td>
-                        <td>lorem@ipsum.cl</td>
-                        <td>+569 5456 5455</td>
-                        <td>
-                            <a href="#" class="btn btn-danger">Eliminar</a>
-                            <a href="#" class="btn btn-secondary">Editar</a>
-                        </td>
-                    </tr>
-                    <!-- <tr>
-                        <th scope="row">2</th>
-                        <td>Lorem Ipsum</td>
-                        <td>+569 5456 5455</td>
-                        <td>lorem@ipsum.cl</td>
-                        <td>Lorem</td>
-                        <td>
-                            <a href="#" class="btn btn-danger">Eliminar</a>
-                            <a href="#" class="btn btn-secondary">Editar</a>
-                        </td>
-                    </tr> -->
                     <tr>
                         <th scope="row">3</th>
                         <td>
@@ -192,12 +168,11 @@
         </div>
     </main>
     <footer></footer>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="./assets/js/general.js"></script>
+    <script src="./assets/js/orden-compra.js"></script>
 </body>
 
 </html>

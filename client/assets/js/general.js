@@ -70,6 +70,24 @@ function valNumber(e, min, max) {
   return valido;
 }
 
+function valSelect(e) {
+  debugger
+  let valor = $(e).val();
+  var error = $(e).siblings('.error');
+  var valido = true;
+
+  if (valor.trim() === "Seleccione") {
+    error.text('Debe estar seleccionado');
+    error.removeClass('d-none');
+    $(e).addClass('is-invalid');
+    valido = false;
+  }  else {
+    error.addClass('d-none');
+    $(e).removeClass('is-invalid');
+  }
+  return valido;
+}
+
 function valEmail(e) {
   var valor = $(e).val();
   var error = $(e).siblings('.error');
