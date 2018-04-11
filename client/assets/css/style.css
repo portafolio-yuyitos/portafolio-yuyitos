@@ -22,3 +22,6 @@ main {
 .cursor-pointer{
 	cursor: pointer;
 }
+.text-danger-light{
+    color: #ffb6bd;
+}

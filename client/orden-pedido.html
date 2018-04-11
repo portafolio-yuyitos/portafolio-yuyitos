@@ -6,15 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Orden de pedido - Almacén Yuyitos</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="../client/assets/css/style.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+        crossorigin="anonymous"></script>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="index.html">Almacén Yuyitos</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+            aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -32,7 +35,8 @@
                     <a class="nav-link" href="orden-pedido.html">Orden de pedido</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuRecepcion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuRecepcion" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
                         Recepción de productos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuRecepcion">
@@ -42,7 +46,8 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuinformes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuinformes" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
                         Informes
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuInformes">
@@ -63,114 +68,91 @@
         </div>
     </header>
     <main class="container">
-        <div class="row justify-content-between bg-light py-5 px-3">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="w-100">Proveedor
-                        <select class="form-control" id='proveedor' onchange="valSelect(this)">
-                            <option>Seleccione</option>
-                            <option>dddd</option>
-                        </select>
-                        <label class="error text-danger d-none position-absolute"></label>
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label class="w-100">Producto
-                        <select class="form-control" id='producto'  onchange="valSelect(this)">
-                            <option>Seleccione</option>
-                            <option>asdjasdjlksad</option>
-                        </select>
-                        <label class="error text-danger d-none position-absolute"></label>
-                    </label>
-                </div>
-                <div class="form-group d-flex flex-column align-items-end">
-                    <label class="w-100">
-                        Cantidad:
-                        <input class="form-control" type="number" value="0" id='cantidad' onkeyup="valCantidad(this,1,9999999)" onchange="valCantidad(this,1,9999999)">
-                        <label class="error text-danger d-none position-absolute"></label>
-                    </label>
-                    <button class="btn btn-secondary d-block mt-4" onclick="agregarOP()">Agregar</button>
+        <div class="row justify-content-between bg-dark py-5 px-3">
+            <div class="col-md-4">
+                <div class="px-3 py-4 bg-light">
+                    <div class="form-group">
+                        <label class="w-100">Proveedor
+                            <select class="form-control" id='proveedor' onchange="valSelect(this)">
+                                <option>Seleccione</option>
+                                <option>dddd</option>
+                            </select>
+                            <label class="error text-danger d-none position-absolute"></label>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="w-100">Producto
+                            <select class="form-control" id='producto' onchange="valSelect(this)">
+                                <option>Seleccione</option>
+                                <option>asdjasdjlksad</option>
+                            </select>
+                            <label class="error text-danger d-none position-absolute"></label>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="w-100">Precio:
+                            <input class="form-control" type="text" value="1000" id='precio' disabled>
+                        </label>
+                    </div>
+                    <div class="form-group d-flex flex-column align-items-end">
+                        <label class="w-100">
+                            Cantidad:
+                            <input class="form-control" type="number" value="0" id='cantidad' onkeyup="valCantidad(this,1,9999999)" onchange="valCantidad(this,1,9999999)">
+                            <label class="error text-danger d-none position-absolute"></label>
+                        </label>
+                        <button class="btn btn-secondary d-block mt-4" onclick="agregarOP()">Agregar Producto</button>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-8 d-flex flex-column justify-content-between">
                 <div class="form-group">
-                    <label class="w-100" id='productosContainer'>Productos
-                        <ul>
-                            <li>Producto 1</li>
-                            <li>Producto 2</li>
-                            <li>Producto 3</li>
-                        </ul>
+                    <table class="w-100 text-light" id='productosContainer'>
+                        <thead>
+                            <tr class="bg-info text-light p-2 font-weight-bold">
+                                <td class="p-2">Proveedor:</td>
+                                <td>Producto:</td>
+                                <td>Cantidad:</td>
+                                <td>Precio:</td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-end text-light">
+                    <label class="mr-2">
+                        <strong>Precio Total: </strong>
+                    </label>
+                    <label id="total">
+                        <strong>0</strong>
                     </label>
                 </div>
+            </div>
+            <div class="col-md-12 d-flex justify-content-end mt-3">
+                <button class="btn btn-primary" onclick="generarOP()">Generar Orden de Pedido</button>
             </div>
         </div>
-        <div class="row my-5">
-            <table class="table">
+        <div class="row my-5 justify-content-center">
+            <table class="table col-md-8" id="tablaOP">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Rut</th>
-                        <th scope="col">Nombre Completo</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Numero</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Precio Total</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>
-                            <p>55555555-5</p>
-                            <input type="text" value="55555555-5" class="form-control editar d-none" onkeyup="checkRut(this)">
-                            <label class="error text-danger d-none "></label>
-                        </td>
-                        <td>Lorem Ipsum</td>
-                        <td>lorem@ipsum.cl</td>
-                        <td>+569 5456 5455</td>
-                        <td>
-                            <a href="#" class="btn btn-danger">Eliminar</a>
-                            <a href="#" class="btn btn-secondary">Editar</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>
-                            <input type="text" value="55555555-5" class="form-control">
-                        </td>
-                        <td>
-                            <input type="text" value="Lorem Ipsum" class="form-control">
-                        </td>
-                        <td>
-                            <input type="text" value="lorem@ipsum.cl" class="form-control">
-                        </td>
-                        <td>
-                            <input type="text" value="+569 5456 5455" class="form-control">
-                        </td>
-                        <td>
-                            <a href="#" class="btn btn-primary">Guardar</a>
-                            <a href="#" class="btn btn-secondary d-none">Editar</a>
-                            <a href="#" class="btn btn-secondary d-none">Editar</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td>55555555-5</td>
-                        <td>Lorem Ipsum</td>
-                        <td>lorem@ipsum.cl</td>
-                        <td>+569 5456 5455</td>
-                        <td>
-                            <a href="#" class="btn btn-danger">Eliminar</a>
-                            <a href="#" class="btn btn-secondary">Editar</a>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>
     </main>
     <footer></footer>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
     <script src="./assets/js/general.js"></script>
     <script src="./assets/js/orden-pedido.js"></script>
 </body>
