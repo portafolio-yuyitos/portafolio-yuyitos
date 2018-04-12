@@ -36,6 +36,7 @@ function valTexto(e, min, max) {
   return valido;
 }
 
+//Valida números
 function valNumber(e, min, max) {
   let valor = e.value;
   var reg = new RegExp('^[0-9]+$');
@@ -70,8 +71,8 @@ function valNumber(e, min, max) {
   return valido;
 }
 
+//Valida los select
 function valSelect(e) {
-  debugger
   let valor = $(e).val();
   var error = $(e).siblings('.error');
   var valido = true;
@@ -81,13 +82,14 @@ function valSelect(e) {
     error.removeClass('d-none');
     $(e).addClass('is-invalid');
     valido = false;
-  }  else {
+  } else {
     error.addClass('d-none');
     $(e).removeClass('is-invalid');
   }
   return valido;
 }
 
+//Valida Emails
 function valEmail(e) {
   var valor = $(e).val();
   var error = $(e).siblings('.error');
@@ -109,6 +111,7 @@ function valEmail(e) {
   }
 }
 
+//Valida el Rut
 function checkRut(rut) {
   //debugger;
   // Despejar Puntos
@@ -174,8 +177,11 @@ function checkRut(rut) {
   return true;
 }
 
+//Elimina la fila
 function eliminar(e) {
   $(e).closest('tr').remove();
+  var tabla = $(e).closest('table');
+  mostrarTabla(tabla);//Muestra tabla si tiene filas
 }
 
 // Recorre todos los input con clase editar y los muestra
@@ -195,6 +201,7 @@ function editar(e) {
   })
 }
 
+//Guarda la fila
 function guardar(e) {
   var editores = $(e).closest('tr').find('.editar');//Todos los input con clase editar
   var valido = true;
@@ -211,33 +218,71 @@ function guardar(e) {
       }
     }
   })
-    //Recorre de nuevo para sacar esconder los input y mostrar lo nuevo
-    if(valido){//Si no hay errores
-      $.each(editores, function (i, editor) {
-        //Si es la ultima columna
-        if (editores.length - 1 === i) {
-          $(editor).addClass('d-none');
-          $(editor).siblings('.btnEliminar').removeClass('d-none');
-          $(editor).siblings('.btnEditar').removeClass('d-none');
-        } else {
-          $(editor).addClass('d-none');
-          var texto = $(editor).val();
-          $(editor).siblings('p').text(texto);
-          $(editor).siblings('p').removeClass('d-none');
-        }
-      })
-    }
+  //Recorre de nuevo para sacar esconder los input y mostrar lo nuevo
+  if (valido) {//Si no hay errores
+    $.each(editores, function (i, editor) {
+      //Si es la ultima columna
+      if (editores.length - 1 === i) {
+        $(editor).addClass('d-none');
+        $(editor).siblings('.btnEliminar').removeClass('d-none');
+        $(editor).siblings('.btnEditar').removeClass('d-none');
+      } else {
+        $(editor).addClass('d-none');
+        var texto = $(editor).val();
+        $(editor).siblings('p').text(texto);
+        $(editor).siblings('p').removeClass('d-none');
+      }
+    })
   }
-  
-  function agregar(){
+}
 
-    var valido = validarTodo();
-  
-    if(!valido){
-      alert('Hay campos no válidos')
-      return false;
-    }else{
-      llenarTabla(valido);
-      return true;
+//Funcion que agrega, llenando tabla
+function agregar() {
+
+  var valido = validarTodo();
+
+  if (!valido) {
+    alert('Hay campos no válidos')
+    return false;
+  } else {
+    llenarTabla(valido);
+    return true;
+  }
+}
+
+//Muestra tabla si tiene mas de una fila, se le pasa la tabla, y un valor si es producto
+function mostrarTabla(tabla,producto) {
+  debugger
+  var filas = tabla.find('tbody tr');
+  if (filas.length > 0) {//Si tiene filas
+    tabla.removeClass('d-none');
+    if(producto !== undefined){//si es producto      
+      // mostrarVacio(undefined,false);
+      $('#vacio').removeClass('d-flex');
+      $('#vacio').addClass('d-none');
+      tabla.closest('.productos').removeClass('d-none');
+      tabla.closest('.productos').addClass('d-flex');
+      tabla.closest('.productos').siblings('.productos').removeClass('d-none');
+      tabla.closest('.productos').siblings('.productos').addClass('d-flex');
+    }
+
+  } else {
+    tabla.addClass('d-none');
+    if(producto !== undefined){//si es producto
+      // mostrarVacio(tabla,true);
+      $('#vacio').addClass('d-flex');
+      $('#vacio').removeClass('d-none');
+      tabla.closest('.productos').addClass('d-none');
+      tabla.closest('.productos').removeClass('d-flex');
+      tabla.closest('.productos').siblings('.productos').addClass('d-none');
+      tabla.closest('.productos').siblings('.productos').removeClass('d-flex');
     }
   }
+}
+
+//DOCUMENT READY
+$('document').ready(function () {
+  //Mostrar o no las tablas si es que tienen filas
+  mostrarTabla($('#productosContainer'),true);
+  mostrarTabla($('#tablaOP'));
+});

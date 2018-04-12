@@ -32,6 +32,7 @@ function valCantidad(e, min, max) {
   return valido;
 }
 
+//Valida todos los input antes de llenar la tabla
 function validarTodo() {
   var proveedor = $('#proveedor');
   var producto = $('#producto');
@@ -48,37 +49,46 @@ function validarTodo() {
   if (!valCantidad(cantidad, 1, 99999999)) {
     valido = false;
   }
-
   if (valido) {
-    var precio = $('#precio')['0'].value * cantidad.value;
-    var productos = $('#productosContainer').find('tbody');
-    var str = '<tr class="border-bottom">';
-    str += '<td class="p-2">' + proveedor.val() + '</td>';
-    str += '<td>' + producto.val() + '</td>';
-    str += '<td>' + cantidad.value + '</td>';
-    str += '<td class="precio">' + precio + '</td></tr>';
-
-    productos.append(str);
-    proveedor['0'].value = "Seleccione";
-    producto['0'].value = "Seleccione";
-    $('#precio')['0'].value = 1000;
-    cantidad.value = 0;
-    return valido;
+    llenarProductos(cantidad, proveedor, producto);//Llena los productos
   }
+
+  return valido;
 }
 
-function agregarOP() {
-  var valido = validarTodo();
+function llenarProductos(cantidad, proveedor, producto) {
+  var precio = $('#precio')['0'].value * cantidad.value;
+  var productos = $('#productosContainer').find('tbody');
+  var str = '<tr class="border-bottom">'; //Crea fila
+  str += '<td class="p-2">' + proveedor.val() + '</td>';
+  str += '<td>' + producto.val() + '</td>';
+  str += '<td>' + cantidad.value + '</td>';
+  str += '<td class="precio">' + precio + '</td></tr>';
+  //Pinta en tabla productos
+  productos.append(str);
+  //Limpiar campos
+  proveedor['0'].value = "Seleccione";
+  producto['0'].value = "Seleccione";
+  $('#precio')['0'].value = 1000;
+  cantidad.value = 0;
+  debugger
+  mostrarTabla(productos.closest('table'), true);
+}
+
+//Agregar Producto
+function agregarProducto() {
+  var valido = validarTodo(); //Valida
 
   if (!valido) {
     alert('Hay campos no válidos')
     return false;
   } else {
-    sumarTotal();
+    sumarTotal();//Suma el total de los productos
     return true;
   }
 }
 
+//Suma el total de los productos
 function sumarTotal() {
   var productos = $('#productosContainer').find('tbody tr');//Busca todos los productos
   var total = 0;
@@ -89,30 +99,101 @@ function sumarTotal() {
   $('#total strong').text(total);//pinta en total
 }
 
+//Genera la Orden de Pedido
 function generarOP() {
-  debugger
   var total = $('#total strong');//Total
   if (total.text() === "0") {//Si es 0
     alert('Debes agregar al menos un producto');
     return false;
   } else {//Si es mas de cero
-    var OP = {
+    var tabla = $('#productosContainer');
+    var filas = tabla.find('tbody tr');
+    var productos = [];//Array Productos, se llenará con Objeto Producto
+    //Llenar productos
+    $.each(filas, function (i, producto) {
+      var columnas = $(producto).find('td');
+      var producto = {};//Objeto Producto
+      //Recorrer columnas de la fila
+      $.each(columnas, function (j, columna) {
+        switch (j) {//verificar columna paa llenar objeto Producto
+          case 0://Proveedor
+            producto.proveedor = columna.textContent;
+            break;
+          case 1://Producto
+            producto.nombre = columna.textContent;
+            break;
+          case 2://Cantidad
+            producto.cantidad = columna.textContent;
+            break;
+          case 3://precio
+            producto.precio = columna.textContent;
+            break;
+          default:
+            break;
+        }
+      });
+      productos.push(producto);
+    });
+    var OP = {//Objeto de orden de pedido
       'id': 123321,
-      'total':total.text()
+      'total': total.text(),
+      'productos': JSON.stringify(productos)
     }
-    llenarTabla(OP);
+
+    llenarTabla(OP);//Llenar la tabla
+    $('#vacio').addClass('d-flex');
+    $('#vacio').removeClass('d-none');
+    tabla.closest('.productos').addClass('d-none');
+    tabla.closest('.productos').removeClass('d-flex');
+    tabla.closest('.productos').siblings('.productos').addClass('d-none');
+    tabla.closest('.productos').siblings('.productos').removeClass('d-flex');
+    tabla.find('tbody').html('');
   }
 }
 
+//Llena la tabla, pasandole un objeto con la orden de pedido
 function llenarTabla(OP) {
   var tabla = $('#tablaOP');
-  var largoTabla = tabla.find('tbody tr').length;
-  var fila = '<tr>';
-  fila += '<th scope="row">' + (largoTabla + 1) + '</th>';
+  var largoTabla = tabla.find('tbody tr').length + 1;
+  var fila = '<tr data-enviada="1" data-productos=' + OP.productos + '>';//Genera fila
+  fila += '<th scope="row">' + largoTabla + '</th>';
   fila += '<td>' + OP.id + '</td>';
   fila += '<td>' + OP.total + '</td>';
-  fila += '<td><a href="#" class="btn btn-danger mr-2" onclick="eliminarOP()">Eliminar</a>';
-  fila += '<a href="#" class="btn btn-secondary" onclick="EditarOP">Editar</a>';
+  fila += '<td><button class="btn btn-danger mr-2" onclick="eliminarOP(this)">Eliminar</button>';
+  fila += '<button class="btn btn-secondary" onclick="muestraOP(this)">Editar</button>';
   fila += '</td></tr>';
-  tabla.find('tbody').append(fila);
+  tabla.find('tbody').append(fila);//pinta fila
+  mostrarTabla(tabla);
 }
+
+//Eliminar orden de pedido si no ha sido enviada
+function eliminarOP(elem) {
+  var fila = $(elem).closest('tr');//Fila
+  var enviada = fila['0'].dataset.enviada;//Data en la fila con valor de enviada
+  if (enviada === "1") {//Si esta eviada === 1
+    alert('No se puede eliminar, está enviada');
+    return false;
+  } else {
+    eliminar(elem);//eliminar fila
+    return true;
+  }
+}
+
+//Muestra la Orden de Pedido, se le pasa elemento
+function muestraOP(elem) {
+  debugger
+  var fila = $(elem).closest('tr');
+  var productosObjeto = JSON.parse(fila['0'].dataset.productos);
+  var productos = $('#productosContainer').find('tbody');
+  $.each(productosObjeto, function (i, prod) {
+    var str = '<tr class="border-bottom">'; //Crea fila
+    str += '<td class="p-2">' + prod.proveedor + '</td>';
+    str += '<td>' + prod.nombre + '</td>';
+    str += '<td>' + prod.cantidad + '</td>';
+    str += '<td class="precio">' + prod.precio + '</td></tr>';
+    //Pinta en tabla productos
+    productos.append(str);
+  });
+  mostrarTabla(productos.closest('table'), true);
+
+} 

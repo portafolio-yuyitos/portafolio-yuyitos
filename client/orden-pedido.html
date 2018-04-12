@@ -6,18 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Orden de pedido - Almacén Yuyitos</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="../client/assets/css/style.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
-        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="index.html">Almacén Yuyitos</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-            aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -35,8 +32,7 @@
                     <a class="nav-link" href="orden-pedido.html">Orden de pedido</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuRecepcion" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuRecepcion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Recepción de productos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuRecepcion">
@@ -46,8 +42,7 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuinformes" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuinformes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Informes
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuInformes">
@@ -69,7 +64,7 @@
     </header>
     <main class="container">
         <div class="row justify-content-between bg-dark py-5 px-3">
-            <div class="col-md-4">
+            <div class="col-md-4 mb-4">
                 <div class="px-3 py-4 bg-light">
                     <div class="form-group">
                         <label class="w-100">Proveedor
@@ -100,11 +95,11 @@
                             <input class="form-control" type="number" value="0" id='cantidad' onkeyup="valCantidad(this,1,9999999)" onchange="valCantidad(this,1,9999999)">
                             <label class="error text-danger d-none position-absolute"></label>
                         </label>
-                        <button class="btn btn-secondary d-block mt-4" onclick="agregarOP()">Agregar Producto</button>
+                        <button class="btn btn-secondary d-block mt-4" onclick="agregarProducto()">Agregar Producto</button>
                     </div>
                 </div>
             </div>
-            <div class="col-md-8 d-flex flex-column justify-content-between">
+            <div class="col-md-8 d-flex flex-column justify-content-between productos">
                 <div class="form-group">
                     <table class="w-100 text-light" id='productosContainer'>
                         <thead>
@@ -127,8 +122,12 @@
                     </label>
                 </div>
             </div>
-            <div class="col-md-12 d-flex justify-content-end mt-3">
+            <div class="col-md-12 d-flex justify-content-end mt-3 productos">
                 <button class="btn btn-primary" onclick="generarOP()">Generar Orden de Pedido</button>
+            </div>
+            <div class="col-md-8 d-flex flex-column text-light justify-content-center align-items-center" id="vacio">
+                <i class="fas fa-file-alt fnt-40 mb-5"></i>
+                <h3>No existe orden de pedido para generar</h3>
             </div>
         </div>
         <div class="row my-5 justify-content-center">
@@ -147,12 +146,9 @@
         </div>
     </main>
     <footer></footer>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="./assets/js/general.js"></script>
     <script src="./assets/js/orden-pedido.js"></script>
 </body>
