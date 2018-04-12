@@ -1,3 +1,4 @@
+// Valida cantidad pasandole su minimo y su maximo
 function valCantidad(e, min, max) {
   let valor = e.value;
   var reg = new RegExp('^[0-9]+$');
@@ -56,16 +57,20 @@ function validarTodo() {
   return valido;
 }
 
+//Llena la tabla de productos con una fila nueva
 function llenarProductos(cantidad, proveedor, producto) {
   var precio = $('#precio')['0'].value * cantidad.value;
-  var productos = $('#productosContainer').find('tbody');
-  var str = '<tr class="border-bottom">'; //Crea fila
-  str += '<td class="p-2">' + proveedor.val() + '</td>';
-  str += '<td>' + producto.val() + '</td>';
-  str += '<td>' + cantidad.value + '</td>';
-  str += '<td class="precio">' + precio + '</td></tr>';
+  var productos = $('#productosContainer');
+  var fila = '<tr class="border-bottom">'; //Crea fila
+  fila += '<td class="p-2">' + proveedor.val() + '</td>';
+  fila += '<td>' + producto.val() + '</td>';
+  fila += '<td>' + cantidad.value + '</td>';
+  fila += '<td class="precio">' + precio + '</td>';
+  fila += '<td><button class="btn btn-danger mr-2 my-2" onclick="eliminar(this,true)">Eliminar</button>';
+  fila += '<button class="btn btn-secondary">Editar</button>';
+  fila += '</td></tr>';
   //Pinta en tabla productos
-  productos.append(str);
+  productos.find('tbody').append(fila);
   //Limpiar campos
   proveedor['0'].value = "Seleccione";
   producto['0'].value = "Seleccione";
@@ -181,19 +186,26 @@ function eliminarOP(elem) {
 
 //Muestra la Orden de Pedido, se le pasa elemento
 function muestraOP(elem) {
-  debugger
+  var productos = $('#productosContainer');//body de tabla productos
+  limpiarTablaProductos(productos);
   var fila = $(elem).closest('tr');
-  var productosObjeto = JSON.parse(fila['0'].dataset.productos);
-  var productos = $('#productosContainer').find('tbody');
-  $.each(productosObjeto, function (i, prod) {
-    var str = '<tr class="border-bottom">'; //Crea fila
-    str += '<td class="p-2">' + prod.proveedor + '</td>';
-    str += '<td>' + prod.nombre + '</td>';
-    str += '<td>' + prod.cantidad + '</td>';
-    str += '<td class="precio">' + prod.precio + '</td></tr>';
+  var productosObjeto = JSON.parse(fila['0'].dataset.productos); //Objeto de propductos guardado en la fila
+  $.each(productosObjeto, function (i, prod) {//Recorrer el array con los produtos para pintarlos en la tabla
+    var fila = '<tr class="border-bottom">'; //Crea fila
+    fila += '<td class="p-2">' + prod.proveedor + '</td>';
+    fila += '<td>' + prod.nombre + '</td>';
+    fila += '<td>' + prod.cantidad + '</td>';
+    fila += '<td class="precio">' + prod.precio + '</td>';
+    fila += '<td><button class="btn btn-danger mr-2 my-2" onclick="eliminar(this,true)">Eliminar</button>';
+    fila += '<button class="btn btn-secondary">Editar</button>';
+    fila += '</td></tr>';
     //Pinta en tabla productos
-    productos.append(str);
+    productos.find('tbody').append(fila);
   });
-  mostrarTabla(productos.closest('table'), true);
+  //Mostrar la tabla
+  mostrarTabla(productos, true);
+}
 
-} 
+function limpiarTablaProductos(tabla){
+  tabla.find('tbody').html('');
+}

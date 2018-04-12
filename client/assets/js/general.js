@@ -178,10 +178,14 @@ function checkRut(rut) {
 }
 
 //Elimina la fila
-function eliminar(e) {
-  $(e).closest('tr').remove();
+function eliminar(e,producto) {
   var tabla = $(e).closest('table');
-  mostrarTabla(tabla);//Muestra tabla si tiene filas
+  $(e).closest('tr').remove();
+  if(producto!==undefined){
+    mostrarTabla(tabla,producto);//Muestra tabla si tiene filas
+  }else{
+    mostrarTabla(tabla);//Muestra tabla si tiene filas
+  }
 }
 
 // Recorre todos los input con clase editar y los muestra
@@ -251,12 +255,12 @@ function agregar() {
 }
 
 //Muestra tabla si tiene mas de una fila, se le pasa la tabla, y un valor si es producto
-function mostrarTabla(tabla,producto) {
+function mostrarTabla(tabla, producto) {
   debugger
   var filas = tabla.find('tbody tr');
   if (filas.length > 0) {//Si tiene filas
     tabla.removeClass('d-none');
-    if(producto !== undefined){//si es producto      
+    if (producto !== undefined) {//si es producto      
       // mostrarVacio(undefined,false);
       $('#vacio').removeClass('d-flex');
       $('#vacio').addClass('d-none');
@@ -268,7 +272,7 @@ function mostrarTabla(tabla,producto) {
 
   } else {
     tabla.addClass('d-none');
-    if(producto !== undefined){//si es producto
+    if (producto !== undefined) {//si es producto
       // mostrarVacio(tabla,true);
       $('#vacio').addClass('d-flex');
       $('#vacio').removeClass('d-none');
@@ -278,11 +282,36 @@ function mostrarTabla(tabla,producto) {
       tabla.closest('.productos').siblings('.productos').removeClass('d-flex');
     }
   }
+
 }
+
+// function llenarListado() {
+//   debugger
+//   var orgComprador = [];
+//   $.ajax({
+//     type: 'GET',
+//     url: 'http://api.mercadopublico.cl/servicios/v1/Publico/Empresas/BuscarComprador?ticket=F8537A18-6766-4DEF-9E59-426B4FEE2844',
+//     cache: false,
+//     contentType: "application/json; charset=utf-8",
+//     async: true,
+//     success: function (data) {
+//       var listaEmpresas = data.listaEmpresas;
+//       $.each(listaEmpresas,function(i,empresa){
+//         var nombre = empresa.nombre;
+//         orgComprador.push(nombre);
+//       });
+//       console.log(orgComprador);
+//     },
+//     error: function (ex) {
+//       alert('askjdhaskjdh');
+//     }
+//   });
+// }
+
 
 //DOCUMENT READY
 $('document').ready(function () {
   //Mostrar o no las tablas si es que tienen filas
-  mostrarTabla($('#productosContainer'),true);
+  mostrarTabla($('#productosContainer'), true);
   mostrarTabla($('#tablaOP'));
 });
